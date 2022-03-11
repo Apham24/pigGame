@@ -34,6 +34,8 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
     private TextView    messageTextView     = null;
     private ImageButton dieImageButton      = null;
     private Button      holdButton          = null;
+    private TextView oppScoreName = null;
+    private TextView playerScoreName = null;
 
     // the android activity that we are running
     private GameMainActivity myActivity;
@@ -63,13 +65,21 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
      */
     @Override
     public void receiveInfo(GameInfo info) {
+        oppScoreName.setText(allPlayerNames[1] + "'s Turn");
+        playerScoreName.setText(allPlayerNames[0] + "'s Turn");
         //TODO You will implement this method to receive state objects from the game
         if(!(info instanceof PigGameState)){
-            flash(255,3);
+            flash(0xFFFF0000,3);
             return;
         }
         else{
+            if(playerNum != ((PigGameState) info).getCurrTurn()){
+                dieImageButton.setBackgroundColor(0xFFFF0000);
+            }else{
+                dieImageButton.setBackgroundColor(0xFFDCDCDC);
+            }
             turnTotalTextView.setText("" +((PigGameState) info).getRunningTotal());
+            messageTextView.setText(((PigGameState) info).getMessage());
             if(playerNum == 0){
                 playerScoreTextView.setText("" + ((PigGameState) info).getScore0());
                 oppScoreTextView.setText("" +((PigGameState) info).getScore1());
@@ -140,7 +150,8 @@ public class PigHumanPlayer extends GameHumanPlayer implements OnClickListener {
         this.messageTextView     = (TextView)activity.findViewById(R.id.messageTextView);
         this.dieImageButton      = (ImageButton)activity.findViewById(R.id.dieButton);
         this.holdButton          = (Button)activity.findViewById(R.id.holdButton);
-
+        this.oppScoreName = (TextView)activity.findViewById(R.id.oppScoreText);
+        this.playerScoreName = activity.findViewById(R.id.yourScoreText);
         //Listen for button presses
         dieImageButton.setOnClickListener(this);
         holdButton.setOnClickListener(this);

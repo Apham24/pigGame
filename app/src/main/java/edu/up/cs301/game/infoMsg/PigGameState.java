@@ -6,6 +6,7 @@ public class PigGameState extends GameState{
     private int score1;
     private int runningTotal;
     private int currValue;
+    private String message;
 
     public PigGameState(){
         this.currTurn = 0;
@@ -13,6 +14,7 @@ public class PigGameState extends GameState{
         this.score1 = 0;
         this.runningTotal = 0;
         this.currValue = 0;
+        this.message = "";
     }
     public PigGameState(PigGameState orig){
         this.currTurn = orig.currTurn;
@@ -20,6 +22,7 @@ public class PigGameState extends GameState{
         this.score1 = orig.score1;
         this.runningTotal = orig.runningTotal;
         this.currValue = orig.currValue;
+        this.message = orig.message;
     }
     public int getCurrTurn(){
         return currTurn;
@@ -36,6 +39,7 @@ public class PigGameState extends GameState{
     public int getCurrValue(){
         return currValue;
     }
+    public String getMessage(){return message;}
     public void setCurrTurn(int val){
         this.currTurn = val;
     }
@@ -51,4 +55,5 @@ public class PigGameState extends GameState{
     public void setCurrValue(int val){
         this.currValue = val;
     }
+    public void setMessage(String val){this.message = val;}
 }

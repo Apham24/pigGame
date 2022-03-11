@@ -53,21 +53,24 @@ public class PigLocalGame extends LocalGame {
                state.setRunningTotal(0);
                if(this.players.length > 1)
                state.setCurrTurn(1);
+               state.setMessage(playerNames[state.getCurrTurn()] + " has added " + state.getRunningTotal() + " to their score");
                return true;
            }
            else if(state.getCurrTurn() == 1){
                state.setScore1(state.getScore1() + state.getRunningTotal());
                state.setRunningTotal(0);
                state.setCurrTurn(0);
+               state.setMessage(playerNames[state.getCurrTurn()] + " has added " + state.getRunningTotal() + " to their score");
                return true;
             }
         }else if(action instanceof PigRollAction){
             state.setCurrValue((int) ((Math.random() * 6) + 1));
             if(state.getCurrValue() != 1){
                 state.setRunningTotal(state.getRunningTotal() + state.getCurrValue());
+                state.setMessage(playerNames[state.getCurrTurn()] + " has added " + state.getRunningTotal() + " to the final score");
             }else {
                 state.setRunningTotal(0);
-
+                state.setMessage(playerNames[state.getCurrTurn()] + " has rolled pig");
             if(this.players.length > 1){
                 if(state.getCurrTurn() == 0) {
                     state.setCurrTurn(1);
